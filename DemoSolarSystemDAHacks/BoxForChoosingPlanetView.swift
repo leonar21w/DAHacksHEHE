@@ -38,7 +38,7 @@ struct PlanetSceneView: UIViewRepresentable {
 	
 	func updateUIView(_ uiView: SCNView, context: Context) {
 		if let planetNode = uiView.scene?.rootNode.childNode(withName: "planetNode", recursively: true) {
-			let scale = isZoomed ? 1.5 : 1.0 // Scale up when zoomed
+			let scale = isZoomed ? 1.2 : 1.0 // Scale up when zoomed
 			planetNode.runAction(SCNAction.scale(to: scale, duration: 0.2))
 		}
 	}

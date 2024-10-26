@@ -80,10 +80,14 @@ struct MarsData: View {
 						.font(.caption)
 						.fontWeight(.light)
 						.foregroundStyle(Color.white)
-						Text("Temperatures On the bright side and dark side fluctuate drastically")
+						Text("Temperatures On the bright side are -20°C to 0°C")
 							.font(.caption)
 							.fontWeight(.light)
 							.foregroundStyle(Color.white)
+						Text("Temperatures On the dark side are -73°C to -90°C ")
+						.font(.caption)
+						.fontWeight(.light)
+						.foregroundStyle(Color.white)
 					VStack{
 						
 						HStack {
