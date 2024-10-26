@@ -15,9 +15,41 @@ struct EarthData: View {
 		ZStack {
 			LoadBackground()
 			TransparentView()
-			VStack{
+			VStack {
+				PlanetSceneView(typeofView: "earthTexture")
+					.frame(width: 350 , height: 350)
+					.clipShape(Circle())
+					.offset(y: -100)
+			}
+			
+			VStack(alignment: .center){
 				Text(vm.data.address)
+					.font(.title)
+					.fontWeight(.semibold)
 					.foregroundStyle(Color.white)
+				Text("\(Int(ceil(vm.data.currentConditions.feelslike)))°")
+					.font(.system(size: 80))
+					.fontWeight(.regular)
+					.foregroundStyle(Color.white)
+				Text("\(vm.data.currentConditions.conditions)")
+					.font(.title)
+					.fontWeight(.medium)
+					.foregroundStyle(Color.white)
+				
+				HStack{
+					Text("Humidity")
+						.font(.subheadline)	.fontWeight(.medium)
+						.foregroundStyle(Color.white)
+					
+					
+					Text("\(vm.data.currentConditions.humidity)")
+						.font(.subheadline)
+						.fontWeight(.medium)
+						.foregroundStyle(Color.white)
+					
+				}
+				
+				
 			}
 		}.navigationBarHidden(true)
 	}
@@ -25,4 +57,5 @@ struct EarthData: View {
 
 #Preview {
     EarthData()
+		.environmentObject(HomeImage())
 }

@@ -38,11 +38,7 @@ class WeatherViewVM: ObservableObject {
 		guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
 			throw URLError(.badServerResponse)
 		}
-		
-		let decodedData = try jsonDecoder.decode(weatherData.self, from: data)
-		print(decodedData)
-
-		return decodedData
+		return try jsonDecoder.decode(weatherData.self, from: data)
 	}
 	
 }

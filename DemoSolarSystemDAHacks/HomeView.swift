@@ -9,7 +9,7 @@ import SwiftUI
 
 	
 struct Homepage: View {
-	@StateObject var homeBackground = HomeImage()
+	@EnvironmentObject var homeBackground: HomeImage
 	
 	
 	
@@ -27,7 +27,7 @@ struct Homepage: View {
 						.padding(.bottom, 20)
 					
 					NavigationLink(destination: ChooseSpaceObjectView()) {
-						Text("Check out the weather conditions")
+						Text("Check for conditions in space 👀")
 							.font(.headline)
 							.fontWeight(.semibold)
 							.foregroundColor(.white.opacity(0.8))
@@ -35,28 +35,30 @@ struct Homepage: View {
 							.background(RoundedRectangle(cornerRadius: 20).fill(Color.gray.opacity(0.4)))
 							.cornerRadius(8)
 						
-		
+						
 					}
 					
 					Spacer()
 					
 					
-					Text("Credits: \(homeBackground.homepageImageData.copyright != "" ? homeBackground.homepageImageData.copyright : "Massimo Di Fusco")")
+					Text("Credits: \(homeBackground.changed ? homeBackground.homepageImageData.copyright : "Massimo Di Fusco")")
 						.font(.headline)
 						.fontWeight(.semibold)
 						.foregroundColor(.white.opacity(0.3))
 					
-					Text(" Title: \(homeBackground.homepageImageData.title != "" ? homeBackground.homepageImageData.title : "Globular Star Cluster NGC 6752")")
+					Text(" Title: \(homeBackground.changed ? homeBackground.homepageImageData.title : "Globular Star Cluster NGC 6752")")
 						.font(.headline)
 						.fontWeight(.semibold)
 						.foregroundColor(.white.opacity(0.3))
 				}
+				.transition(.opacity)
+				.animation(.easeInOut(duration: 0.5), value: homeBackground.changed)
 				.padding()
 			}
 		}
 	}
 }
 
-	#Preview {
-		Homepage()
-	}
+#Preview {
+	Homepage()
+}

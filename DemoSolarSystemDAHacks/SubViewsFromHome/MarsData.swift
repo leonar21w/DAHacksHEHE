@@ -13,7 +13,13 @@ struct MarsData: View {
 			LoadBackground()
 			TransparentView()
 			VStack{
-				Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+				Text("not done 🥲")
+					.font(.title)
+					.foregroundStyle(Color.white)
+				Image("hehenotdone")
+					.resizable()
+					.scaledToFit()
+					.frame(width: 300, height: 300)
 			}
 		}.navigationBarHidden(true)
 	}

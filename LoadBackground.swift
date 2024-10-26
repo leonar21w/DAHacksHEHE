@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct LoadBackground: View {
-	@StateObject var homeBackground = HomeImage()
+	@EnvironmentObject var homeBackground: HomeImage
+	
+	func getthisdone() {
+		withAnimation(.spring(duration: 0.5)) {
+			homeBackground.changed = true
+		}
+	}
+	
+	
+	
     var body: some View {
 		CacheAsyncImage(
 			url:
@@ -30,6 +39,9 @@ struct LoadBackground: View {
 					.scaledToFill()
 					.ignoresSafeArea()
 					.overlay(Color.black.opacity(0.5))
+					.onAppear {
+						getthisdone()
+					}
 
 			case .failure:
 				// Show the placeholder image in case of an error
@@ -50,6 +62,15 @@ struct LoadBackground: View {
 		}
 
     }
+}
+struct notLoaded: View {
+	var body: some View {
+		Image("NASAIMAGE")
+			.resizable()
+			.scaledToFill()
+			.ignoresSafeArea()
+			.overlay(Color.black.opacity(0.5))
+	}
 }
 
 #Preview {

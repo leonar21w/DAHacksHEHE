@@ -7,13 +7,11 @@ struct BoxForChoosingPlanetView: View {
 
 	var body: some View {
 		ZStack(alignment: .bottomLeading) {
-			// 3D Earth background using SceneKit, clipped to a circular shape
 			PlanetSceneView(typeofView: typeOfView)
-				.frame(width: 150 , height: 150) // Set the size for the Earth
-				.clipShape(Circle()) // Clip the SceneKit view to a circular shape
-				.offset(x: 6, y: 35) // Position the Earth in the corner
+				.frame(width: 150 , height: 150)
+				.clipShape(Circle())
+				.offset(x: 6, y: 35)
 
-			// Your original SwiftUI content
 			Text(celestialObject)
 				.font(.title)
 				.fontWeight(.bold)
@@ -22,7 +20,7 @@ struct BoxForChoosingPlanetView: View {
 				.foregroundStyle(Color.white.opacity(0.8))
 				.background(RoundedRectangle(cornerRadius: 20).fill(Color.white.opacity(0.2)))
 		}
-		.padding() // Optional: Add padding to the outer ZStack
+		.padding()
 	}
 }
 
@@ -30,24 +28,28 @@ struct PlanetSceneView: UIViewRepresentable {
 	@State var typeofView: String
 	func makeUIView(context: Context) -> SCNView {
 		let sceneView = SCNView()
-		sceneView.scene = createEarthScene() // Configure the Earth scene
-		sceneView.allowsCameraControl = true // Allow user interaction with the scene
-		sceneView.backgroundColor = UIColor.clear // Transparent background
+		sceneView.scene = createPlanetScene(for: typeofView)
+		sceneView.allowsCameraControl = true
+		sceneView.backgroundColor = UIColor.clear
 		return sceneView
 	}
 	
 	func updateUIView(_ uiView: SCNView, context: Context) {}
 	
-	// Create a SceneKit scene with a 3D Earth
-	func createEarthScene() -> SCNScene {
+	func createPlanetScene(for textureName: String) -> SCNScene {
 		let scene = SCNScene()
 		
-		// Add a 3D Earth node
-		let earthNode = SCNNode(geometry: SCNSphere(radius: 1.0))
-		let earthMaterial = SCNMaterial()
-		earthMaterial.diffuse.contents = UIImage(named: typeofView) // Replace with your Earth texture image
-		earthNode.geometry?.materials = [earthMaterial]
-		scene.rootNode.addChildNode(earthNode)
+		// Add a 3D Planet node
+		let planetNode = SCNNode(geometry: SCNSphere(radius: 1.0))
+		planetNode.name = "planetNode"
+		let planetMaterial = SCNMaterial()
+		planetMaterial.diffuse.contents = UIImage(named: typeofView)
+		planetNode.geometry?.materials = [planetMaterial]
+		
+		// Rotate the planet to face California (earth only)
+		planetNode.eulerAngles.y = Float(90 * Float.pi / 180)
+		
+		scene.rootNode.addChildNode(planetNode)
 		
 		// Add a light source
 		let lightNode = SCNNode()

@@ -5,16 +5,16 @@
 //  Created by Leonard on 10/25/24.
 //
 import Foundation
+import SwiftUI
 @MainActor
 class HomeImage: ObservableObject {
 	@Published var homepageImageData: HomeImageStruct = HomeImageStruct(url: "", title: "", copyright: "")
+	@Published var changed: Bool = false
 
 	init() {
 		Task {
 			do {
 				self.homepageImageData = try await getRequest()
-				print("sucess")
-				print("\(homepageImageData.url!)")
 			} catch {
 				print("Error fetching data: \(error)")
 			}
@@ -35,8 +35,7 @@ class HomeImage: ObservableObject {
 			throw URLError(.badServerResponse)
 		}
 		
-		let decodedData = try jsonDecoder.decode(HomeImageStruct.self, from: data)
-		return decodedData
+		return try jsonDecoder.decode(HomeImageStruct.self, from: data)
 	}
 	
 }

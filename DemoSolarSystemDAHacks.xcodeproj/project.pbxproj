@@ -10,12 +10,14 @@
 		D754EB082CCC4C8500AF4802 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = D754EB072CCC4C8500AF4802 /* CachedAsyncImage */; };
 		D754EB102CCC723000AF4802 /* LoadBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D754EB0F2CCC723000AF4802 /* LoadBackground.swift */; };
 		D754EB122CCC738600AF4802 /* Imageloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D754EB112CCC738600AF4802 /* Imageloader.swift */; };
+		D754EB412CCCB46B00AF4802 /* DemoSolarSystemDAHacksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D754EB322CCCB46B00AF4802 /* DemoSolarSystemDAHacksApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D754EAE52CCC38E900AF4802 /* DemoSolarSystemDAHacks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoSolarSystemDAHacks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D754EB0F2CCC723000AF4802 /* LoadBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBackground.swift; sourceTree = "<group>"; };
 		D754EB112CCC738600AF4802 /* Imageloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imageloader.swift; sourceTree = "<group>"; };
+		D754EB322CCCB46B00AF4802 /* DemoSolarSystemDAHacksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSolarSystemDAHacksApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -41,6 +43,7 @@
 		D754EADC2CCC38E900AF4802 = {
 			isa = PBXGroup;
 			children = (
+				D754EB322CCCB46B00AF4802 /* DemoSolarSystemDAHacksApp.swift */,
 				D754EB0F2CCC723000AF4802 /* LoadBackground.swift */,
 				D754EB112CCC738600AF4802 /* Imageloader.swift */,
 				D754EAE72CCC38E900AF4802 /* DemoSolarSystemDAHacks */,
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D754EB412CCCB46B00AF4802 /* DemoSolarSystemDAHacksApp.swift in Sources */,
 				D754EB122CCC738600AF4802 /* Imageloader.swift in Sources */,
 				D754EB102CCC723000AF4802 /* LoadBackground.swift in Sources */,
 			);

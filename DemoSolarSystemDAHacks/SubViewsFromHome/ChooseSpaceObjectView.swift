@@ -12,33 +12,33 @@ struct ChooseSpaceObjectView: View {
 		ZStack {
 			LoadBackground()
 			TransparentView()
-			VStack (alignment: .leading){
+			VStack{
 				HStack {
-					Text("Choose a Celestial body :)")
+					Text("A glance to our trip")
 						.font(.title)
 						.fontWeight(.bold)
 						.foregroundStyle(Color.white.opacity(0.8))
-						.padding(.horizontal, 20)
+						.padding(.horizontal, 35)
 					
 				}
-				HStack {
-					NavigationLink(destination: EarthData()) {
-						BoxForChoosingPlanetView(celestialObject: "Earth", typeOfView: "earthTexture")
-							.padding(.horizontal, 10)
-					}
-					NavigationLink(destination: MoonData()) {
-						BoxForChoosingPlanetView(celestialObject: "Moon", typeOfView: "MoonTexture")
-							.padding(.horizontal, 10)
-					}
-					
-				}
-				HStack {
-					NavigationLink(destination: MarsData()) {
-						BoxForChoosingPlanetView(celestialObject: "Mars", typeOfView: "marstexture")
-							.padding(.horizontal, 10)
+				VStack (alignment: .leading){
+					HStack {
+						NavigationLink(destination: EarthData()) {
+							BoxForChoosingPlanetView(celestialObject: "Earth", typeOfView: "earthTexture")
+						}
+						NavigationLink(destination: MoonData()) {
+							BoxForChoosingPlanetView(celestialObject: "Moon", typeOfView: "MoonTexture")
+						}
 						
 					}
-				}
+					HStack {
+						NavigationLink(destination: MarsData()) {
+							BoxForChoosingPlanetView(celestialObject: "Mars", typeOfView: "marstexture")
+							
+						}
+					}
+				}.padding(.horizontal, 35)
+					.padding(.leading, 10)
 
 			}
 			Spacer()

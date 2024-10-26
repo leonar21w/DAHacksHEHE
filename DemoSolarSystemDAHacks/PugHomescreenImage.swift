@@ -14,7 +14,16 @@ struct Test: View {
 
     }
 }
+struct cat: View {
+	var body: some View {
+		Image("HEHECAT")
+			.resizable()
+			.scaledToFit()
+	}
+}
+
+
 
 #Preview {
-    Test()
+	cat()
 }
