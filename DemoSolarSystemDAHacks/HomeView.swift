@@ -17,6 +17,8 @@ struct Homepage: View {
 		NavigationStack {
 			ZStack {
 				LoadBackground()
+				Test()
+					.scaledToFit()
 				VStack {
 					Text("Traveling in Space?")
 						.font(.title)
@@ -32,6 +34,8 @@ struct Homepage: View {
 							.padding()
 							.background(RoundedRectangle(cornerRadius: 20).fill(Color.gray.opacity(0.4)))
 							.cornerRadius(8)
+						
+		
 					}
 					
 					Spacer()
