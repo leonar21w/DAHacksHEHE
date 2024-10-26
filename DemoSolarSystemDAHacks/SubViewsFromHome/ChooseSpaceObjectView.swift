@@ -12,6 +12,8 @@ struct ChooseSpaceObjectView: View {
 		ZStack {
 			LoadBackground()
 			TransparentView()
+			anoyedCat()
+				.offset(x: 100, y: 350)
 			VStack{
 				HStack {
 					Text("A glance to our trip")
@@ -36,6 +38,7 @@ struct ChooseSpaceObjectView: View {
 							BoxForChoosingPlanetView(celestialObject: "Mars", typeOfView: "marstexture")
 							
 						}
+						
 					}
 				}.padding(.horizontal, 35)
 					.padding(.leading, 10)

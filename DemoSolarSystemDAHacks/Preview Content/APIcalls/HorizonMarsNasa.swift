@@ -1,5 +1,5 @@
 //
-//  HorizonNasaAPI.swift
+//  File.swift
 //  DemoSolarSystemDAHacks
 //
 //  Created by Leonard on 10/26/24.
@@ -8,25 +8,20 @@
 import Foundation
 
 
-struct dataBeLike {
-	
-}
-
 @MainActor
-class EarthMoonDistanceFetcher: ObservableObject {
+class EarthMarsDistanceFetcher: ObservableObject {
 	
 	private let baseURL = "https://ssd.jpl.nasa.gov/api/horizons.api"
 	
-	@Published var moonDistanceData = DistAndEpArr(distances: [])
+	@Published var marsDistanceData = DistAndEpArr(distances: [])
 	
 	init() {
-		appendEarthMoonDistance()
-		//when we initialize this class just get the data already
-		//The onappear will return the beaver so that beaver can populate the array of tuples
+		appendEarthMarsDistance()
 	}
 	
+	
 	func calculateTravelTimes(distanceKm: Double) -> (String, String) {
-		let averageSpeedKmPerHour = 5000.0  // Average speed, e.g., Apollo missions
+		let averageSpeedKmPerHour = 44642.8571429 // Average speed of mars missions
 		
 		let timeHours = distanceKm / averageSpeedKmPerHour
 		
@@ -36,15 +31,15 @@ class EarthMoonDistanceFetcher: ObservableObject {
 		return (String(timeDays), String(Int(ceil(remainingHours))))
 	}
 	
-	func beaverwearinghat() -> [(Double, String, String)] {
-			var results: [(Double, String, String)] = []
-			
-			for distance in moonDistanceData.distances {
-				let travelTime = calculateTravelTimes(distanceKm: distance)
-				results.append((distance, travelTime.0, travelTime.1)) //0 is days //1 is remain hours
-			}
-			return results
+	func platypuswearinghat() -> [(Double, String, String)] {
+		var results: [(Double, String, String)] = []
+		
+		for distance in marsDistanceData.distances {
+			let travelTime = calculateTravelTimes(distanceKm: distance)
+			results.append((distance, travelTime.0, travelTime.1)) //0 is days //1 is remain hours
 		}
+		return results
+	}
 	
 	
 	func fetchEarthMoonDistance(completion: @escaping (Result<String, Error>) -> Void) {
@@ -56,7 +51,7 @@ class EarthMoonDistanceFetcher: ObservableObject {
 		
 		let parameters: [String: String] = [
 			"format": "json",
-			"COMMAND": "301", //Moon code
+			"COMMAND": "499", //Mars code
 			"EPHEM_TYPE": "OBSERVER",
 			"CENTER": "500@399",
 			"START_TIME": dateFormatter.string(from: yesterday ?? Date()),
@@ -103,7 +98,7 @@ class EarthMoonDistanceFetcher: ObservableObject {
 		task.resume()
 	}
 	
-	func appendEarthMoonDistance() {
+	func appendEarthMarsDistance() {
 		fetchEarthMoonDistance { result in
 			switch result {
 				case .success(let dataString):
@@ -130,7 +125,7 @@ class EarthMoonDistanceFetcher: ObservableObject {
 								let distanceKm = auValue * auToKm
 								let roundedDistance = (distanceKm * 100).rounded() / 100
 								DispatchQueue.main.async {
-									self.moonDistanceData.distances.append(roundedDistance)
+									self.marsDistanceData.distances.append(roundedDistance)
 								}
 							}
 						}
@@ -142,10 +137,3 @@ class EarthMoonDistanceFetcher: ObservableObject {
 		}
 	}
 }
-
-
-struct DistAndEpArr {
-	var distances: [Double] = []
-}
-
-

@@ -22,6 +22,14 @@ struct cat: View {
 	}
 }
 
+struct anoyedCat: View {
+	var body: some View {
+		Image("annoyedCat")
+			.resizable()
+			.scaledToFit()
+	}
+}
+
 
 
 #Preview {

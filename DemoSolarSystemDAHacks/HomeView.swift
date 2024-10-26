@@ -27,7 +27,7 @@ struct Homepage: View {
 						.padding(.bottom, 20)
 					
 					NavigationLink(destination: ChooseSpaceObjectView()) {
-						Text("Check for conditions in space 👀")
+						Text("Check for destinations in space")
 							.font(.headline)
 							.fontWeight(.semibold)
 							.foregroundColor(.white.opacity(0.8))
