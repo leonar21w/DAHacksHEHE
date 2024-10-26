@@ -27,7 +27,7 @@ class EarthMoonDistanceFetcher: ObservableObject {
 		let timeHours = distanceKm / averageSpeedKmPerHour
 		
 		let timeDays = Int(timeHours / 24)
-		let remainingHours = timeHours.truncatingRemainder(dividingBy: 24)
+		let remainingHours = (timeHours * 100).rounded() / 100
 		
 		return (String(timeDays), String(Int(ceil(remainingHours))))
 	}

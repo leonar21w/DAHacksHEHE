@@ -10,6 +10,7 @@ import SwiftUI
 struct MarsData: View {
 	
 	@StateObject var horizonvm = EarthMarsDistanceFetcher()
+	@StateObject var tempmars = theresbullisinmyveinsnowMARS()
 	
 	@State private var isVisible = false
 	@State private var isZoomed1 = false
@@ -18,6 +19,22 @@ struct MarsData: View {
 	var body: some View {
 		ZStack {
 			LoadBackground()
+			
+			ZStack{
+				Text("\(getDate())")
+					.font(.subheadline)
+					.fontWeight(.semibold)
+					.foregroundStyle(Color.white)
+			}
+			.offset(x: -90 , y: -5)
+			
+			ZStack{
+				Text("\(getDateminusone())")
+					.font(.subheadline)
+					.fontWeight(.semibold)
+					.foregroundStyle(Color.white)
+			}
+			.offset(x: -90 , y: -135)
 			
 			ZStack {
 				PlanetSceneView(typeofView: "earthTexture", isZoomed: $isZoomed1)
@@ -66,8 +83,8 @@ struct MarsData: View {
 							.foregroundStyle(Color.white)
 					}
 					.padding()
-					.background(RoundedRectangle(cornerRadius: 20).fill(Color.white.opacity(0.3)))
-					.padding()
+					Divider()
+						.foregroundStyle(Color.white)
 				}
 				
 				//CHANGE THIS WITH DATA
@@ -76,42 +93,18 @@ struct MarsData: View {
 						.font(.subheadline)
 						.fontWeight(.semibold)
 						.foregroundStyle(Color.white)
-					Text("Just remember that the suns rays there are stronger D:")
+					Text("Just remember that temperature easily plummets")
 						.font(.caption)
 						.fontWeight(.light)
 						.foregroundStyle(Color.white)
-						Text("Temperatures On the bright side are -20°C to 0°C")
+					Text("Temperatures can get as high as to \(Int(tempmars.marsTemp.temperature.max))°C")
 							.font(.caption)
 							.fontWeight(.light)
 							.foregroundStyle(Color.white)
-						Text("Temperatures On the dark side are -73°C to -90°C ")
+					Text("Temperatures can go down to \(Int(tempmars.marsTemp.temperature.min))°C")
 						.font(.caption)
 						.fontWeight(.light)
 						.foregroundStyle(Color.white)
-					VStack{
-						
-						HStack {
-							Text("Daytime")
-								.font(.caption)
-								.fontWeight(.semibold)
-								.foregroundStyle(Color.white)
-							Text("121°C")
-								.font(.caption)
-								.fontWeight(.light)
-								.foregroundStyle(Color.white)
-						}
-						HStack {
-							Text("NightTime")
-								.font(.caption)
-								.fontWeight(.semibold)
-								.foregroundStyle(Color.white)
-							Text("-133°C")
-								.font(.caption)
-								.fontWeight(.light)
-								.foregroundStyle(Color.white)
-						}
-						
-					}
 				}
 				
 			}
@@ -125,6 +118,6 @@ struct MarsData: View {
 }
 
 #Preview {
-	MoonData()
+	MarsData()
 		.environmentObject(HomeImage())
 }

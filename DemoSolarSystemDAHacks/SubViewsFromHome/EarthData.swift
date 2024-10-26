@@ -20,7 +20,7 @@ struct EarthData: View {
 				PlanetSceneView(typeofView: "earthTexture", isZoomed: $isZoomed)
 					.frame(width: 350 , height: 350)
 					.clipShape(Circle())
-					.offset(y: -100)
+					.offset(y: -130)
 					.onLongPressGesture(minimumDuration: 0.1, maximumDistance: 50, pressing: { pressing in
 						withAnimation {
 							isZoomed = pressing

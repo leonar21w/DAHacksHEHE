@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct MoonData: View {
 	
 	@StateObject var horizonvm = EarthMoonDistanceFetcher()
@@ -16,9 +18,26 @@ struct MoonData: View {
 	@State private var isZoomed1 = false
 	@State private var isZoomed2 = false
 	
+	
 	var body: some View {
 		ZStack {
 			LoadBackground()
+			
+			ZStack{
+				Text("\(getDate())")
+					.font(.subheadline)
+					.fontWeight(.semibold)
+					.foregroundStyle(Color.white)
+			}
+			.offset(x: -80 , y: -10)
+			
+			ZStack{
+				Text("\(getDateminusone())")
+					.font(.subheadline)
+					.fontWeight(.semibold)
+					.foregroundStyle(Color.white)
+			}
+			.offset(x: -80 , y: -140)
 			
 			ZStack {
 				PlanetSceneView(typeofView: "earthTexture", isZoomed: $isZoomed1)
@@ -44,6 +63,7 @@ struct MoonData: View {
 					}) {}
 			}
 			TransparentView()
+			
 			
 			VStack{
 				Text("Time to get there?")
