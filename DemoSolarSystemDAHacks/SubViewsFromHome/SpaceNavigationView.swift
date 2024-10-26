@@ -15,8 +15,6 @@ struct SpaceNavigationView: View {
 	var body: some View {
 		ZStack {
 			LoadBackground()
-			TransparentView()
-				.offset(x: 20)
 			anoyedCat()
 				.offset(x: 100, y: 350)
 			VStack {
@@ -61,6 +59,8 @@ struct SpaceNavigationView: View {
 				.onTapGesture {
 					toggle3.toggle()
 				}
+			TransparentView()
+				.offset(x: 20)
 				
 			.navigationBarHidden(true)
 			.navigationDestination(isPresented: $toggle1) {
