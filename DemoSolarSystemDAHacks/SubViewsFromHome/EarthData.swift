@@ -10,16 +10,23 @@ import SwiftUI
 struct EarthData: View {
 	
 	@StateObject var vm = WeatherViewVM()
+	@State private var isZoomed = false
 	
 	var body: some View {
 		ZStack {
 			LoadBackground()
 			TransparentView()
 			VStack {
-				PlanetSceneView(typeofView: "earthTexture")
+				PlanetSceneView(typeofView: "earthTexture", isZoomed: $isZoomed)
 					.frame(width: 350 , height: 350)
 					.clipShape(Circle())
 					.offset(y: -100)
+					.onLongPressGesture(minimumDuration: 0.1, maximumDistance: 50, pressing: { pressing in
+						withAnimation {
+							isZoomed = pressing
+						}
+					}) {}
+					
 			}
 			
 			VStack(alignment: .center){

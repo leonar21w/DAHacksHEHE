@@ -13,22 +13,35 @@ struct MoonData: View {
 	
 	@State private var isVisible = false
 	
+	@State private var isZoomed1 = false
+	@State private var isZoomed2 = false
+	
 	var body: some View {
 		ZStack {
 			LoadBackground()
 			
 			ZStack {
-				PlanetSceneView(typeofView: "earthTexture")
+				PlanetSceneView(typeofView: "earthTexture", isZoomed: $isZoomed1)
 					.frame(width: 700 , height: 700)
 					.clipShape(Circle())
 					.offset(x: 150,y: -250)
+					.onLongPressGesture(minimumDuration: 0.1, maximumDistance: 50, pressing: { pressing in
+						withAnimation {
+							isZoomed1 = pressing
+						}
+					}) {}
 				
 				cat()
 					.offset(x: 130, y: 350)
-				PlanetSceneView(typeofView: "MoonTexture")
+				PlanetSceneView(typeofView: "MoonTexture", isZoomed: $isZoomed2)
 					.frame(width: 700 , height: 700)
 					.clipShape(Circle())
 					.offset(x: -150,y: 250)
+					.onLongPressGesture(minimumDuration: 0.1, maximumDistance: 50, pressing: { pressing in
+						withAnimation {
+							isZoomed2 = pressing
+						}
+					}) {}
 			}
 			TransparentView()
 			
@@ -54,8 +67,8 @@ struct MoonData: View {
 							.foregroundStyle(Color.white)
 					}
 					.padding()
-					.background(RoundedRectangle(cornerRadius: 20).fill(Color.white.opacity(0.3)))
-					.padding()
+					Divider()
+						.foregroundStyle(Color.white)
 				}
 				
 				VStack(alignment: .center){
@@ -109,4 +122,5 @@ struct MoonData: View {
 
 #Preview {
 	MoonData()
+		.environmentObject(HomeImage())
 }

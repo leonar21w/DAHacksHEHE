@@ -7,10 +7,11 @@ struct BoxForChoosingPlanetView: View {
 
 	var body: some View {
 		ZStack(alignment: .bottomLeading) {
-			PlanetSceneView(typeofView: typeOfView)
+			PlanetSceneView(typeofView: typeOfView, isZoomed: .constant(false))
 				.frame(width: 150 , height: 150)
 				.clipShape(Circle())
 				.offset(x: 6, y: 35)
+			
 
 			Text(celestialObject)
 				.font(.title)
@@ -26,6 +27,7 @@ struct BoxForChoosingPlanetView: View {
 
 struct PlanetSceneView: UIViewRepresentable {
 	@State var typeofView: String
+	@Binding var isZoomed: Bool
 	func makeUIView(context: Context) -> SCNView {
 		let sceneView = SCNView()
 		sceneView.scene = createPlanetScene(for: typeofView)
@@ -34,7 +36,12 @@ struct PlanetSceneView: UIViewRepresentable {
 		return sceneView
 	}
 	
-	func updateUIView(_ uiView: SCNView, context: Context) {}
+	func updateUIView(_ uiView: SCNView, context: Context) {
+		if let planetNode = uiView.scene?.rootNode.childNode(withName: "planetNode", recursively: true) {
+			let scale = isZoomed ? 1.5 : 1.0 // Scale up when zoomed
+			planetNode.runAction(SCNAction.scale(to: scale, duration: 0.2))
+		}
+	}
 	
 	func createPlanetScene(for textureName: String) -> SCNScene {
 		let scene = SCNScene()
